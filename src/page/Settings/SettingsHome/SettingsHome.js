@@ -13,9 +13,8 @@ import Skeleton from "../../Share/Skeleton/Skeleton";
 import DeleteAccount from "../DeleteAccount/DeleteAccount";
 
 const SettingsHome = () => {
-  const { user, emailVerification, deleteUserAccount } = useAuth();
+  const { user, profile, emailVerification, deleteUserAccount } = useAuth();
 
-  const [profile, setProfile] = useState({});
   const [message, setMessage] = useState(false);
 
   const [avatar, setAvatar] = useState(null);
@@ -23,14 +22,6 @@ const SettingsHome = () => {
 
   const [successMessage, setSuccessMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    fetch(`http://localhost:65000/users/${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProfile(data);
-      });
-  }, [user.email]);
 
   // console.log(user);
 
@@ -104,7 +95,7 @@ const SettingsHome = () => {
 
   return (
     <>
-      {profile.email ? (
+      {profile?.email ? (
         <div>
           <Container maxWidth="lg" sx={{ py: 10 }}>
             <Grid container spacing={2}>

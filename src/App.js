@@ -11,6 +11,9 @@ import PrivateRoute from "./page/Security/PrivateRoute/PrivateRoute";
 import Navbar from "./page/Share/Navbar/Navbar";
 import Footer from "./page/Share/Footer/Footer";
 import SettingsHome from "./page/Settings/SettingsHome/SettingsHome";
+import Home from "./page/Home/Home/Home";
+import Blogs from "./page/Blogs/Blogs/Blogs";
+import BlogDetails from "./page/Blogs/BlogDetails/BlogDetails";
 
 function App() {
   render(
@@ -18,6 +21,46 @@ function App() {
       <AuthProvider>
         <Navbar></Navbar>
         <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Home></Home>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Home></Home>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/answers"
+            element={
+              <PrivateRoute>
+                <Home></Home>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/blogs"
+            element={
+              <PrivateRoute>
+                <Blogs></Blogs>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="blogs/:blogsId"
+            element={
+              <PrivateRoute>
+                <BlogDetails />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/settings"
             element={
@@ -30,6 +73,7 @@ function App() {
           <Route path="/register" element={<Register></Register>} />
         </Routes>
         <Footer></Footer>
+        {/* </div> */}
       </AuthProvider>
     </BrowserRouter>,
 

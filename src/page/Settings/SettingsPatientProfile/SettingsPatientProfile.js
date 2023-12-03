@@ -1,4 +1,3 @@
-import { setRef } from "@mui/material";
 import React, { useState } from "react";
 
 const SettingsPatientProfile = ({ profile }) => {

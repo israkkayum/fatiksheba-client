@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
@@ -6,14 +6,18 @@ import {
   BellIcon,
   UserCircleIcon,
   XMarkIcon,
+  HomeIcon,
+  PencilSquareIcon,
+  LightBulbIcon,
 } from "@heroicons/react/24/outline";
 import useAuth from "../../../hooks/useAuth";
+import logo from "../../../images/logo.png";
+import { NavLink, useLocation } from "react-router-dom";
 
 const navigation = [
-  { name: "Home", href: "/home", current: true },
-  { name: "Team", href: "/profile", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Home", href: "/home", icon: HomeIcon, current: true },
+  { name: "Answers", href: "/answers", icon: PencilSquareIcon, current: false },
+  { name: "Blogs", href: "/blogs", icon: LightBulbIcon, current: false },
 ];
 
 function classNames(...classes) {
@@ -21,16 +25,8 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
-  const [profile, setProfile] = useState({});
-
-  useEffect(() => {
-    fetch(`http://localhost:65000/users/${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProfile(data);
-      });
-  }, [user.email]);
+  const { user, profile, logout } = useAuth();
+  const location = useLocation();
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -49,34 +45,40 @@ const Navbar = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <img
+                className="hidden h-10 w-auto lg:block md:block"
+                src={logo}
+                alt="Your Company"
+              />
+              <div className="flex flex-1 items-center justify-center">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    className="block h-10 w-auto lg:hidden md:hidden"
+                    src={logo}
                     alt="Your Company"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-10">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
+                          location.pathname === item.href
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        aria-current={
+                          location.pathname === item.href ? "page" : undefined
+                        }
                       >
-                        {item.name}
+                        <item.icon
+                          className="h-6 w-6 text-white-600 group-hover:text-indigo-600"
+                          aria-hidden="true"
+                        />
+                        {/* {item.name} */}
                       </a>
                     ))}
                   </div>
@@ -148,7 +150,7 @@ const Navbar = () => {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <NavLink
                               href="#"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
@@ -157,7 +159,7 @@ const Navbar = () => {
                               onClick={logout}
                             >
                               Sign out
-                            </a>
+                            </NavLink>
                           )}
                         </Menu.Item>
                       </Menu.Items>

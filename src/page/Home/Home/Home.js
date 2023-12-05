@@ -33,7 +33,7 @@ const Home = () => {
       <div class="container py-7 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-4 grid-cols-1 gap-10">
           <div class="lg:flex hidden bg-white p-2 rounded h-screen"></div>
-          <div class="col-span-2 h-screen overflow-auto">
+          <div class="col-span-2">
             <CreatePost profile={profile}></CreatePost>
             {problemsPost.length != 0 ? (
               <>

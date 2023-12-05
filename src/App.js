@@ -14,6 +14,8 @@ import SettingsHome from "./page/Settings/SettingsHome/SettingsHome";
 import Home from "./page/Home/Home/Home";
 import Blogs from "./page/Blogs/Blogs/Blogs";
 import BlogDetails from "./page/Blogs/BlogDetails/BlogDetails";
+import QuestionsAnswersHome from "./page/QuestionsAnswers/QuestionsAnswersHome/QuestionsAnswersHome";
+import QuestionQuickView from "./page/QuestionsAnswers/QuestionsQuickView/QuestionQuickView";
 
 function App() {
   render(
@@ -41,7 +43,15 @@ function App() {
             path="/answers"
             element={
               <PrivateRoute>
-                <Home></Home>
+                <QuestionsAnswersHome />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="answers/:questionsId"
+            element={
+              <PrivateRoute>
+                <QuestionQuickView />
               </PrivateRoute>
             }
           />

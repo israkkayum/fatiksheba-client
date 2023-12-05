@@ -66,9 +66,9 @@ const CreatePostPatient = ({ open, setOpen, profile }) => {
 
     formData.append("email", email);
     formData.append("date", date);
-    formData.append("ask", askText);
+    formData.append("question", askText);
 
-    fetch("http://localhost:65000/ask", {
+    fetch("http://localhost:65000/question", {
       method: "POST",
       body: formData,
     })

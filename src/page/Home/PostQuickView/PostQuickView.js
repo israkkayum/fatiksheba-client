@@ -5,46 +5,48 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { Alert, Avatar, CardHeader } from "@mui/material";
-import AnswerBox from "../AnswerBox/AnswerBox";
 import useAuth from "../../../hooks/useAuth";
-import Answers from "../Answers/Answers";
+import Comments from "../Comments/Comments";
+import CommentBox from "../CommentBox/CommentBox";
 
-const QuestionQuickView = () => {
-  const { questionsId } = useParams();
+const PostQuickView = () => {
+  const { problemsId } = useParams();
   const { profile } = useAuth();
 
-  const [questions, setQuestions] = useState([]);
+  const [problems, setProblems] = useState([]);
   const [userData, setUserData] = useState({});
-  const [answers, setAnswers] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const navigate = useNavigate();
   const handleGoBack = () => {
-    navigate("/answers");
+    navigate("/");
   };
 
   useEffect(() => {
-    fetch(`http://localhost:65000/question/${questionsId}`)
+    fetch(`http://localhost:65000/problem/${problemsId}`)
       .then((res) => res.json())
       .then((data) => {
-        setQuestions(data);
+        setProblems(data);
       });
-  }, [questionsId]);
+  }, [problemsId]);
 
   useEffect(() => {
-    fetch(`http://localhost:65000/users/${questions?.email}`)
+    fetch(`http://localhost:65000/users/${problems?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
       });
-  }, [questions?.email]);
+  }, [problems?.email]);
 
   useEffect(() => {
-    fetch(`http://localhost:65000/answers/${questions?._id}`)
+    fetch(`http://localhost:65000/problem-comments/${problems?._id}`)
       .then((res) => res.json())
       .then((data) => {
-        setAnswers(data);
+        setComments(data);
       });
-  }, [questions?._id]);
+  }, [problems?._id]);
+
+  // console.log(problems);
 
   return (
     <Transition.Root show={true} as={Fragment}>
@@ -84,9 +86,17 @@ const QuestionQuickView = () => {
                   </button>
 
                   <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 md:grid-cols-12 lg:gap-x-8">
-                    <div className="overflow-hidden sm:col-span-4 lg:col-span-5">
+                    <div class="w-fit h-fit overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
+                      <img
+                        src={`data:image/png;base64,${problems?.image}`}
+                        alt="Two each of gray, white, and black shirts arranged on table."
+                        class="object-cover h-fit w-fit"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-8 lg:col-span-7">
                       <CardHeader
-                        className="bg-gray-100 rounded-lg"
+                        className="bg-gray-100 rounded-lg mr-16"
                         avatar={
                           <Avatar
                             alt=""
@@ -94,36 +104,34 @@ const QuestionQuickView = () => {
                           />
                         }
                         title={userData?.firstName + " " + userData?.lastName}
-                        subheader={questions.date}
+                        subheader={problems.date}
                       />
 
                       <blockquote class="block text-md font-medium text-black leading-normal mt-5">
-                        {questions.question}
+                        {problems.description}
                       </blockquote>
-                      <div className="mt-10">
-                        {profile?.status == "physician" ? (
-                          <AnswerBox
-                            key={profile?._id}
-                            profile={profile}
-                            post={questions}
-                          ></AnswerBox>
-                        ) : (
-                          <Alert severity="info">
-                            Patients are not allowed to write answers.
-                          </Alert>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-8 lg:col-span-7">
-                      <h2 className="text-xl font-bold text-gray-900 sm:pr-12">
-                        {answers.length} Answers
-                      </h2>
 
                       <div className="mt-5 overflow-y-auto lg:h-96">
-                        {answers.map((answer) => (
-                          <Answers key={answer._id} answer={answer}></Answers>
+                        {comments.map((comment) => (
+                          <Comments
+                            key={comment._id}
+                            comment={comment}
+                          ></Comments>
                         ))}
+                      </div>
+
+                      <div className="mt-10">
+                        {profile?.status == "physician" ? (
+                          <CommentBox
+                            key={profile?._id}
+                            profile={profile}
+                            post={problems}
+                          ></CommentBox>
+                        ) : (
+                          <Alert severity="info">
+                            Patients are not allowed to post comments.
+                          </Alert>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -137,4 +145,4 @@ const QuestionQuickView = () => {
   );
 };
 
-export default QuestionQuickView;
+export default PostQuickView;

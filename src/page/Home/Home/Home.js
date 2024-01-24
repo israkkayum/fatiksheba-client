@@ -18,7 +18,7 @@ const Home = () => {
         setProfiles(data);
         setFilteredData(data);
       });
-  }, [user.email]);
+  }, [user?.email]);
 
   useEffect(() => {
     fetch("http://localhost:65000/problems")
@@ -26,7 +26,7 @@ const Home = () => {
       .then((data) => {
         setProblemsPost(data);
       });
-  }, [user.email]);
+  }, [user?.email]);
 
   return (
     <div class="bg-gray-100">

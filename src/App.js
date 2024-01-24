@@ -16,6 +16,8 @@ import Blogs from "./page/Blogs/Blogs/Blogs";
 import BlogDetails from "./page/Blogs/BlogDetails/BlogDetails";
 import QuestionsAnswersHome from "./page/QuestionsAnswers/QuestionsAnswersHome/QuestionsAnswersHome";
 import QuestionQuickView from "./page/QuestionsAnswers/QuestionsQuickView/QuestionQuickView";
+import PostQuickView from "./page/Home/PostQuickView/PostQuickView";
+import ProfileHome from "./page/Profile/ProfileHome/ProfileHome";
 
 function App() {
   render(
@@ -36,6 +38,22 @@ function App() {
             element={
               <PrivateRoute>
                 <Home></Home>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="home/:problemsId"
+            element={
+              <PrivateRoute>
+                <PostQuickView />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/:problemsId"
+            element={
+              <PrivateRoute>
+                <PostQuickView />
               </PrivateRoute>
             }
           />
@@ -76,6 +94,14 @@ function App() {
             element={
               <PrivateRoute>
                 <SettingsHome />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile/:profileId"
+            element={
+              <PrivateRoute>
+                <ProfileHome></ProfileHome>
               </PrivateRoute>
             }
           />

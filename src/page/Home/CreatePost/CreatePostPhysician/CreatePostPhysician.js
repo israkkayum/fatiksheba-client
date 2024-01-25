@@ -230,7 +230,7 @@ const CreatePostPhysician = ({ open, setOpen, profile }) => {
                         >
                           <svg
                             aria-hidden="true"
-                            role="status"
+                            role="type"
                             class="inline w-4 h-4 mr-3 text-white animate-spin"
                             viewBox="0 0 100 101"
                             fill="none"

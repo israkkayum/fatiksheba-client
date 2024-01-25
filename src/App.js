@@ -18,6 +18,8 @@ import QuestionsAnswersHome from "./page/QuestionsAnswers/QuestionsAnswersHome/Q
 import QuestionQuickView from "./page/QuestionsAnswers/QuestionsQuickView/QuestionQuickView";
 import PostQuickView from "./page/Home/PostQuickView/PostQuickView";
 import ProfileHome from "./page/Profile/ProfileHome/ProfileHome";
+import DashboardHome from "./page/Dashboard/DashboardHome/DashboardHome";
+import AdminRoute from "./page/Security/AdminRoute/AdminRoute";
 
 function App() {
   render(
@@ -102,6 +104,16 @@ function App() {
             element={
               <PrivateRoute>
                 <ProfileHome></ProfileHome>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <AdminRoute>
+                  <DashboardHome />
+                </AdminRoute>
               </PrivateRoute>
             }
           />

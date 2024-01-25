@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import PatientProfile from "../PatientProfile/PatientProfile";
 import Skeleton from "../../Share/Skeleton/Skeleton";
 import useAuth from "../../../hooks/useAuth";
+import PhysicianProfile from "../PhysicianProfile/PhysicianProfile";
 
 const ProfileHome = () => {
   const { profileId } = useParams();
@@ -12,6 +13,7 @@ const ProfileHome = () => {
   const [profileData, setProfileData] = useState({});
   const [questions, setQuestions] = useState([]);
   const [problems, setProblems] = useState([]);
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:65000/profile/${profileId}`)
@@ -37,6 +39,14 @@ const ProfileHome = () => {
       });
   }, [profileData?.email]);
 
+  useEffect(() => {
+    fetch(`http://localhost:65000/blogs/${profileData?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogs(data);
+      });
+  }, [profileData?.email]);
+
   return (
     <div>
       <Container maxWidth="lg" sx={{ py: 10 }}>
@@ -54,7 +64,11 @@ const ProfileHome = () => {
                     problems={problems}
                   />
                 ) : (
-                  <div>physician</div>
+                  <PhysicianProfile
+                    key={profileData._id}
+                    profileData={profileData}
+                    blogs={blogs}
+                  />
                 )}
               </div>
             )}

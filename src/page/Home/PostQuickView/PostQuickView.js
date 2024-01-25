@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Alert, Avatar, CardHeader } from "@mui/material";
 import useAuth from "../../../hooks/useAuth";
 import Comments from "../Comments/Comments";
@@ -98,12 +98,18 @@ const PostQuickView = () => {
                       <CardHeader
                         className="bg-gray-100 rounded-lg mr-16"
                         avatar={
-                          <Avatar
-                            alt=""
-                            src={`data:image/png;base64,${userData?.profilePic}`}
-                          />
+                          <NavLink to={`/profile/${userData?._id}`}>
+                            <Avatar
+                              alt=""
+                              src={`data:image/png;base64,${userData?.profilePic}`}
+                            />
+                          </NavLink>
                         }
-                        title={userData?.firstName + " " + userData?.lastName}
+                        title={
+                          <NavLink to={`/profile/${userData?._id}`}>
+                            {userData?.firstName + " " + userData?.lastName}
+                          </NavLink>
+                        }
                         subheader={problems.date}
                       />
 

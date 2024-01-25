@@ -25,7 +25,7 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
-  const { user, profile, logout } = useAuth();
+  const { profile, logout, admin } = useAuth();
   const location = useLocation();
 
   return (
@@ -84,7 +84,7 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-              {user.email ? (
+              {profile?.email ? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
@@ -137,17 +137,32 @@ const Navbar = () => {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="/settings"
+                            <NavLink
+                              to="/settings"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               Settings
-                            </a>
+                            </NavLink>
                           )}
                         </Menu.Item>
+                        {admin && (
+                          <Menu.Item>
+                            {({ active }) => (
+                              <NavLink
+                                to="/dashboard"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Dashboard
+                              </NavLink>
+                            )}
+                          </Menu.Item>
+                        )}
                         <Menu.Item>
                           {({ active }) => (
                             <NavLink

@@ -4,6 +4,7 @@ import { Tab } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { Alert } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -134,21 +135,25 @@ const CreatePostPatient = ({ open, setOpen, profile }) => {
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 border-b border-gray-200">
                     <div className="sm:flex sm:items-start sm:items-center">
                       <div className="mx-auto flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10">
-                        <div class="shrink-0">
-                          <img
-                            class="h-8 w-8 rounded-full"
-                            src={`data:image/png;base64,${profile?.profilePic}`}
-                            alt="profile avatar"
-                          />
-                        </div>
+                        <NavLink to={`/profile/${profile._id}`}>
+                          <div class="shrink-0">
+                            <img
+                              class="h-8 w-8 rounded-full"
+                              src={`data:image/png;base64,${profile?.profilePic}`}
+                              alt="profile avatar"
+                            />
+                          </div>
+                        </NavLink>
                       </div>
                       <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                        <Dialog.Title
-                          as="h3"
-                          className="text-base font-semibold leading-6 text-gray-900"
-                        >
-                          {profile.firstName + " " + profile.lastName}
-                        </Dialog.Title>
+                        <NavLink to={`/profile/${profile._id}`}>
+                          <Dialog.Title
+                            as="h3"
+                            className="text-base font-semibold leading-6 text-gray-900"
+                          >
+                            {profile.firstName + " " + profile.lastName}
+                          </Dialog.Title>
+                        </NavLink>
                       </div>
                     </div>
                   </div>
@@ -259,7 +264,7 @@ const CreatePostPatient = ({ open, setOpen, profile }) => {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  role="status"
+                                  role="type"
                                   class="inline w-4 h-4 mr-3 text-white animate-spin"
                                   viewBox="0 0 100 101"
                                   fill="none"
@@ -334,7 +339,7 @@ const CreatePostPatient = ({ open, setOpen, profile }) => {
                               >
                                 <svg
                                   aria-hidden="true"
-                                  role="status"
+                                  role="type"
                                   class="inline w-4 h-4 mr-3 text-white animate-spin"
                                   viewBox="0 0 100 101"
                                   fill="none"

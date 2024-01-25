@@ -89,10 +89,12 @@ const Post = ({ post, profile }) => {
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 variant="dot"
               >
-                <Avatar
-                  alt=""
-                  src={`data:image/png;base64,${userData?.profilePic}`}
-                />
+                <NavLink to={`/profile/${userData._id}`}>
+                  <Avatar
+                    alt=""
+                    src={`data:image/png;base64,${userData?.profilePic}`}
+                  />
+                </NavLink>
               </StyledBadge>
             </Stack>
           }
@@ -101,7 +103,11 @@ const Post = ({ post, profile }) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={userData?.firstName + " " + userData?.lastName}
+          title={
+            <NavLink to={`/profile/${userData._id}`}>
+              {userData?.firstName + " " + userData?.lastName}
+            </NavLink>
+          }
           subheader={date}
         />
         <NavLink to={`${post._id}`}>

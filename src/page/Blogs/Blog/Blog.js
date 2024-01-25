@@ -59,7 +59,7 @@ const Blog = ({ post }) => {
 
             <div className="text-sm leading-6">
               <p className="font-semibold text-gray-900">
-                <NavLink>
+                <NavLink to={`/profile/${userData._id}`}>
                   <span className="absolute inset-0" />
                   {userData.firstName + " " + userData.lastName}
                 </NavLink>

@@ -15,7 +15,7 @@ const BlogDetails = () => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:65000/blogs/${blogsId}`)
+    fetch(`http://localhost:65000/blog/${blogsId}`)
       .then((res) => res.json())
       .then((data) => {
         setPost(data);
@@ -88,7 +88,7 @@ const BlogDetails = () => {
 
               <div className="text-sm leading-6">
                 <p className="font-semibold text-gray-900">
-                  <NavLink>
+                  <NavLink to={`/profile/${userData._id}`}>
                     <span className="absolute inset-0" />
                     {userData?.firstName + " " + userData?.lastName}
                   </NavLink>

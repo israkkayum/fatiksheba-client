@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Skeleton from "../../Share/Skeleton/Skeleton";
+import { NavLink } from "react-router-dom";
 
 const FindPhysician = ({ profiles, filteredData, setFilteredData }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,19 +41,23 @@ const FindPhysician = ({ profiles, filteredData, setFilteredData }) => {
       </label>
 
       {profiles.length != 0 ? (
-        <ul role="list" class="p-6 divide-y divide-slate-200">
+        <ul class="p-6 divide-y divide-slate-200">
           {filteredData.map(
             (profile) =>
               profile.status == "physician" && (
                 <li class="flex py-4 first:pt-0 last:pb-0 items-center">
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    src={`data:image/png;base64,${profile.profilePic}`}
-                    alt=""
-                  />
+                  <NavLink to={`/profile/${profile._id}`}>
+                    <img
+                      class="h-8 w-8 rounded-full"
+                      src={`data:image/png;base64,${profile.profilePic}`}
+                      alt=""
+                    />
+                  </NavLink>
                   <div class="ml-3 overflow-hidden">
                     <p class="text-sm font-medium text-slate-900">
-                      {profile.firstName + " " + profile.lastName}
+                      <NavLink to={`/profile/${profile._id}`}>
+                        {profile.firstName + " " + profile.lastName}
+                      </NavLink>
                     </p>
                   </div>
                 </li>

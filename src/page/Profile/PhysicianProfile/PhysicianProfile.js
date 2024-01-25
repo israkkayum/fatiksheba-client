@@ -2,8 +2,7 @@ import { Box, Grid, Paper, Tab, Tabs, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import Skeleton from "../../Share/Skeleton/Skeleton";
-import Questions from "../Questions/Questions";
-import Post from "../../Home/Post/Post";
+import Blogs from "../../Blogs/Blogs/Blogs";
 import { NavLink } from "react-router-dom";
 
 function TabPanel(props) {
@@ -39,7 +38,7 @@ function a11yProps(index) {
   };
 }
 
-const PatientProfile = ({ profileData, questions, problems }) => {
+const PhysicianProfile = ({ profileData, blogs }) => {
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -83,11 +82,11 @@ const PatientProfile = ({ profileData, questions, problems }) => {
                     </p>
                   </div>
                 </li>
-                <li className="flex justify-start gap-x-6 py-3">
+                <li className="flex justify-start gap-x-20 py-3">
                   <div className="flex min-w-0 gap-x-4">
                     <div className="min-w-0 flex-auto">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
-                        Contact Number
+                        Contact
                       </p>
                     </div>
                   </div>
@@ -95,6 +94,22 @@ const PatientProfile = ({ profileData, questions, problems }) => {
                     <p className="text-sm leading-6 text-gray-900">
                       <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                         {profileData.phoneNumber}
+                      </span>
+                    </p>
+                  </div>
+                </li>
+                <li className="flex justify-start gap-x-16 py-3">
+                  <div className="flex min-w-0 gap-x-4">
+                    <div className="min-w-0 flex-auto">
+                      <p className="text-sm font-semibold leading-6 text-gray-900">
+                        Specialist
+                      </p>
+                    </div>
+                  </div>
+                  <div className="shrink-0 sm:flex sm:flex-col sm:items-end">
+                    <p className="text-sm leading-6 text-gray-900">
+                      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                        {profileData.specialist}
                       </span>
                     </p>
                   </div>
@@ -160,27 +175,7 @@ const PatientProfile = ({ profileData, questions, problems }) => {
                   //   },
                   // }}
                 >
-                  {/* Questions  */}
-
-                  <Tab
-                    style={{
-                      fontWeight: "bold",
-                      fontSize: "15px",
-                      display: "flow",
-                      justifyContent: "left",
-                      textAlign: "left",
-                      // marginTop: "-5px",
-                      // marginBottom: "-5px",
-                    }}
-                    {...a11yProps(0)}
-                    iconPosition="start"
-                    // icon={
-                    //   <UserIcon className="h-11 w-11 pr-5" aria-hidden="true" />
-                    // }
-                    label="Questions"
-                  />
-
-                  {/* Problems */}
+                  {/* Blogs */}
 
                   <Tab
                     style={{
@@ -200,8 +195,8 @@ const PatientProfile = ({ profileData, questions, problems }) => {
                     //   />
                     // }
                     iconPosition="start"
-                    label="Problems"
-                    {...a11yProps(1)}
+                    label="Blogs"
+                    {...a11yProps(0)}
                   />
                 </Tabs>
               </Box>
@@ -224,14 +219,10 @@ const PatientProfile = ({ profileData, questions, problems }) => {
             {/* Questions */}
 
             <TabPanel value={value} index={0}>
-              {questions.length !== 0 ? (
+              {blogs.length !== 0 ? (
                 <>
-                  {questions.map((question) => (
-                    <Questions
-                      key={question._id}
-                      post={question}
-                      profileData={profileData}
-                    ></Questions>
+                  {blogs.map((blog) => (
+                    <Blogs key={blog._id} post={blog}></Blogs>
                   ))}
                 </>
               ) : (
@@ -239,23 +230,6 @@ const PatientProfile = ({ profileData, questions, problems }) => {
               )}
             </TabPanel>
 
-            {/* Problems */}
-
-            <TabPanel value={value} index={1}>
-              {problems.length !== 0 ? (
-                <>
-                  {problems.map((problem) => (
-                    <Post
-                      key={problem._id}
-                      post={problem}
-                      profileData={profileData}
-                    ></Post>
-                  ))}
-                </>
-              ) : (
-                <Skeleton />
-              )}
-            </TabPanel>
             {/* </Paper> */}
           </Box>
         </Grid>
@@ -264,4 +238,4 @@ const PatientProfile = ({ profileData, questions, problems }) => {
   );
 };
 
-export default PatientProfile;
+export default PhysicianProfile;

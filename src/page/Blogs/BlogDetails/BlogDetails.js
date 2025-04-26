@@ -22,6 +22,8 @@ const BlogDetails = () => {
       });
   }, [blogsId]);
 
+  // console.log(post.description);
+
   useEffect(() => {
     fetch(`http://localhost:65000/users/${post.email}`)
       .then((res) => res.json())

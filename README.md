@@ -1,6 +1,81 @@
-# Getting Started with Create React App
+# FatikSheba - Healthcare Platform (Client Side)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
+
+FatikSheba is a comprehensive healthcare platform designed to connect patients with doctors and provide healthcare services online. This repository contains the client-side application built with React.
+
+## Features
+
+- User authentication and authorization
+- Doctor profiles and specialization browsing
+- Responsive design for all devices
+- Interactive UI with modern design principles
+- Role-based access control system
+
+## User Roles and Permissions
+
+FatikSheba implements a comprehensive role-based access control system with three user types:
+
+### Admin
+
+- Dashboard for platform management
+- User management (approve/reject physician registrations)
+- Content management for the platform
+- Analytics and reporting capabilities
+- Blog post management and moderation
+
+### Physician
+
+- Professional profile creation and management
+- Patient history and medical records access
+- Prescription management
+- Blog posting and health advice sharing
+- Direct messaging with patients
+
+### Patient
+
+- Personal health profile management
+- Doctor search and filtering by specialization
+- Medical history tracking
+- Health problem sharing and discussion
+- Rating and reviewing physicians
+- Direct messaging with assigned physicians
+
+## Technology Stack
+
+- **React.js** - Frontend library
+- **React Router** - For navigation and routing
+- **Tailwind CSS** - For styling and responsive design
+- **Material UI** - Component library
+- **Firebase** - Authentication and hosting
+- **Axios** - HTTP client for API requests
+- **Flowbite** - UI component library
+
+## Installation
+
+1. Clone the repository
+
+   ```
+   git clone https://github.com/yourusername/FatikSheba.git
+   cd FatikSheba/doctor-client-side
+   ```
+
+2. Install dependencies
+
+   ```
+   npm install
+   ```
+
+3. Create a `.env` file in the root directory and add your Firebase configuration
+   ```
+   REACT_APP_FIREBASE_API_KEY=your_api_key
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   REACT_APP_FIREBASE_APP_ID=your_app_id
+   REACT_APP_API_URL=your_backend_api_url
+   ```
 
 ## Available Scripts
 
@@ -8,26 +83,24 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.  
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
+The page will reload when you make changes.  
 You may also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.  
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.  
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.  
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
 
@@ -35,37 +108,42 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Deployment
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This project is configured for Firebase hosting. To deploy:
 
-## Learn More
+1. Build the project
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```
+   npm run build
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Deploy to Firebase
+   ```
+   firebase deploy --only hosting
+   ```
 
-### Code Splitting
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+src/
+  ├── components/     # Reusable UI components
+  ├── contexts/       # React context providers
+  ├── hooks/          # Custom React hooks
+  ├── images/         # Static images
+  ├── pages/          # Application pages
+  ├── App.js          # Main application component
+  └── index.js        # Application entry point
+```
 
-### Analyzing the Bundle Size
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# fatiksheba-client
+This project is licensed under the ISC License.
